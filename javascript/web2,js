@@ -1,0 +1,349 @@
+= localStorage.getItem('products') ? JSON.parse(localStorage.getItem('products')) : [];
+
+
+
+
+
+
+
+
+let title = document.getElementById('title');
+let price = document.getElementById('price');
+let taxes = document.getElementById('taxes');
+let ads = document.getElementById('ads');
+let discount = document.getElementById('discount');
+let total = document.getElementById('total');
+let category = document.getElementById('category');
+let count = document.getElementById('count');
+let submit = document.getElementById('submit');
+
+let mood = 'create';
+let tmp; // لحفظ رقم العنصر أثناء التعديل
+
+function getTotal() {
+    if (price.value !== '') {
+        let result = (+price.value + +taxes.value + +ads.value) - (+discount.value);
+        total.innerHTML = result;
+        total.style.background = '#040';
+    } else {
+        total.innerHTML = '';
+        total.style.background = '#a00d02';
+    }
+}
+
+let maindata = localStorage.getItem('products') ? JSON.parse(localStorage.getItem('products')) : [];
+
+submit.onclick = function () {
+    let subdata = {
+        title: title.value,
+        price: price.value,
+        taxes: taxes.value,
+        ads: ads.value,
+        discount: discount.value,
+        total: total.innerHTML,
+        category: category.value,
+        count: count.value
+    };
+
+    if (mood === 'create') {
+        if (subdata.count > 1) {
+            for (let i = 0; i < subdata.count; i++) {
+                maindata.push(subdata);
+            }
+        } else {
+            maindata.push(subdata);
+        }
+    } else {
+        // تحديث المنتج
+        maindata[tmp] = subdata;
+        mood = 'create';
+        submit.innerHTML = 'Create';
+        count.style.display = 'block';
+    }
+
+    localStorage.setItem('products', JSON.stringify(maindata));
+    clearInputs();
+    show();
+}
+
+function clearInputs() {
+    title.value = '';
+    price.value = '';
+    taxes.value = '';
+    ads.value = '';
+    discount.value = '';
+    total.innerHTML = '';
+    category.value = '';
+    count.value = '';
+}
+
+function show() {
+    let table = '';
+    for (let i = 0; i < maindata.length; i++) {
+        table += `
+            <tr>
+                <td>${i + 1}</td>
+                <td>${maindata[i].title}</td>
+                <td>${maindata[i].price}</td>
+                <td>${maindata[i].taxes}</td>
+                <td>${maindata[i].ads}</td>
+                <td>${maindata[i].discount}</td>
+                <td>${maindata[i].total}</td>
+                <td>${maindata[i].count}</td>
+                <td>${maindata[i].category}</td>
+                <td><button onclick="update(${i})" class="btn-update">Update</button></td>
+                <td><button onclick="delet(${i})" class="btn-delete">Delete</button></td>
+            </tr>
+        `;
+    }
+    document.getElementById('tbody').innerHTML = table;
+
+    let deletall = document.getElementById('deletall');
+    if (maindata.length > 0) {
+        deletall.innerHTML = `<button onclick="deletall()">Delete All (${maindata.length})</button>`;
+    } else {
+        deletall.innerHTML = '';
+    }
+}
+
+function delet(i) {
+    maindata.splice(i, 1);
+    localStorage.setItem('products', JSON.stringify(maindata));
+    show();
+}
+
+function deletall() {
+    localStorage.clear();
+    maindata = [];
+    show();
+}
+
+function update(i) {
+    let data = maindata[i];
+    title.value = data.title;
+    price.value = data.price;
+    taxes.value = data.taxes;
+    ads.value = data.ads;
+    discount.value = data.discount;
+    category.value = data.category;
+    getTotal();
+
+    count.style.display = 'none'; // ← إخفاء خانة العدد أثناء التعديل
+    submit.innerHTML = 'Update';
+    mood = 'update';
+    tmp = i; // ← حفظ رقم المنتج المراد تعديله
+}
+
+show();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ... existing code ...
+
+// Get all input elements
+const inputs = document.querySelectorAll('input');
+
+// Add event listeners for Enter key
+inputs.forEach((input, index) => {
+    input.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            // If the current input is 'category', trigger submit
+            if (input === category) {
+                submit.click();
+            }
+            // Otherwise, move to next input
+            else if (index < inputs.length - 1) {
+                inputs[index + 1].focus();
+            }
+        }
+    });
+});
+
+submit.onclick = function() {
+    // Check if title and price are filled
+    if (!title.value.trim() || !price.value.trim()) {
+        alert('الرجاء إدخال العنوان والسعر');
+        return; // Stop the function if validation fails
+    }
+
+    let subdata = {
+        title: title.value,
+        price: price.value,
+        taxes: taxes.value,
+        ads: ads.value,
+        discount: discount.value,
+        total: total.innerHTML,
+        category: category.value,
+        count: count.value
+    }
+    
+    // Save to localStorage
+    let products = JSON.parse(localStorage.getItem('products')) || [];
+    products.push(subdata);
+    localStorage.setItem('products', JSON.stringify(products));
+    
+    // Clear input fields
+    title.value = '';
+    price.value = '';
+    taxes.value = '';
+    ads.value = '';
+    discount.value = '';
+    total.innerHTML = '';
+    category.value = '';
+    count.value = '';
+    
+    // Reset total background
+    total.style.background = '#a00d02';
+}
+
+// ... existing code ...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ... existing code ...
+
+// Add this variable to track the index being updated
+let updateIndex = null;
+
+// Update function
+function update(i) {
+    // Fill the input fields with the selected data
+    title.value = maindata[i].title;
+    price.value = maindata[i].price;
+    taxes.value = maindata[i].taxes;
+    ads.value = maindata[i].ads;
+    discount.value = maindata[i].discount;
+    category.value = maindata[i].category;
+    count.value = maindata[i].count;
+    getTotal(); // Update the total field
+    
+    // Change the submit button to an update button
+    submit.innerHTML = "Update";
+    submit.onclick = function() {
+        // Update the data in the array
+        maindata[i] = {
+            title: title.value,
+            price: price.value,
+            taxes: taxes.value,
+            ads: ads.value,
+            discount: discount.value,
+            total: total.innerHTML,
+            category: category.value,
+            count: count.value
+        };
+        
+        // Save to localStorage
+        localStorage.setItem('products', JSON.stringify(maindata));
+        
+        // Clear the form
+        clearForm();
+        
+        // Change the button back to "Create"
+        submit.innerHTML = "Create";
+        submit.onclick = createProduct;
+        
+        // Refresh the table
+        show();
+    };
+}
+
+// Modify the existing submit function to be a separate create function
+function createProduct() {
+    let subdata = {
+        title: title.value,
+        price: price.value,
+        taxes: taxes.value,
+        ads: ads.value,
+        discount: discount.value,
+        total: total.innerHTML,
+        category: category.value,
+        count: count.value
+    };
+    maindata.push(subdata);
+    localStorage.setItem('products', JSON.stringify(maindata));
+    clearForm();
+    show();
+}
+
+// Clear form function
+function clearForm() {
+    title.value = '';
+    price.value = '';
+    taxes.value = '';
+    ads.value = '';
+    discount.value = '';
+    total.innerHTML = '';
+    category.value = '';
+    count.value = '';
+}
+
+// Initialize the submit button
+submit.innerHTML = "Create";
+submit.onclick = createProduct;
+
+// ... existing code ...

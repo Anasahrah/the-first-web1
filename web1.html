@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/web1.css">
+    <body>
+    
+
+  <h2>accountant</h2>
+
+  <div id="input" style="text-align: center;">
+    <div class="title">
+        <input type="text" id="title" placeholder="title">
+    </div>
+    <div class="total">
+      <input onkeyup="getTotal()" type="number" id="price" placeholder="price">
+      <input onkeyup="getTotal()" type="number" id="taxes" placeholder="taxes">
+      <input onkeyup="getTotal()" type="number" id="ads" placeholder="ads">
+      <input onkeyup="getTotal()" type="number" id="discount" placeholder="discount">
+      <small id="total"> total:</small>
+      
+      </div>
+     <div class="count">
+        <input type="number" id="count" placeholder="count">
+     </div>
+    
+    <div class="category">
+      <input type="text" id="category" placeholder="category">
+  </div>
+  <div class="great">
+  <button class="btn" id="submit">Create</button>
+  </div>
+</div>
+  <div class="search-container">
+      <input type="text" id="search" placeholder="Search" onkeyup="searchData(this.value)">
+    <div class="search-by">
+      <span onclick="searchfunc(this.id)" class="btn-search" id="searchCategory">Search By Category</span>
+      <span onclick="searchfunc(this.id)" class="btn-search" id="searchTitle">Search By Title</span>
+    </div>
+    <div id="deletall"></div>
+    <div class="table-container">
+      
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>TITLE</th>
+        <th>PRICE</th>
+        <th>TAXES</th>
+        <th>ADS</th>
+        <th>DISCOUNT</th>
+        <th>TOTAL</th>
+        <th>COUNT</th>
+        <th>CATEGORY</th>
+        <th>UPDATE</th>
+        <th>DELETE</th>
+      </tr>
+    </thead>
+    <tbody id="tbody">
+      
+      
+    </tbody>
+  </table>
+    </div>
+  </div>
+<script src="javascript/wed1.js"></script>
+</body>
+</html>
