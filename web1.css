@@ -1,0 +1,206 @@
+/* 🌙 تصميم عصري داكن 2025 */
+
+:root {
+  --bg-color: #121212;
+  --card-bg: #1e1e1e;
+  --accent-color: #00bcd4;
+  --primary-color: #6200ea;
+  --danger-color: #e53935;
+  --success-color: #43a047;
+  --text-color: #f0f0f0;
+  --border-color: #333;
+  --hover-darken: 0.1;
+  --radius: 12px;
+  --transition: 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  padding: 24px;
+  max-width: 1200px;
+  margin: auto;
+  line-height: 1.6;
+}
+
+/* العناوين */
+h2{
+  text-align: center;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+/* إدخالات البيانات */
+#input, .search-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 20px;
+  background-color: var(--card-bg);
+  padding: 20px;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+input {
+  width: 80%;
+  background: #262626;
+  color: #fff;
+  border: 1px solid var(--border-color);
+  padding: 14px;
+  border-radius: var(--radius);
+  width: 100%;
+  max-width: 260px;
+  transition: var(--transition);
+}
+
+input:focus {
+  border-color: var(--accent-color);
+  outline: none;
+  background-color: #2f2f2f;
+}
+
+/* الزر Create */
+.btn, button, .btn-search {
+  background: var(--primary-color);
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 16px;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 2px 8px rgba(98, 0, 234, 0.3);
+}
+
+.btn:hover, button:hover, .btn-search:hover {
+  background: #3700b3;
+}
+
+/* تخصيص الأزرار */
+button.btn-delete {
+  background: var(--danger-color);
+}
+button.btn-delete:hover {
+  background: #b71c1c;
+}
+
+button.btn-update {
+  background: var(--success-color);
+}
+button.btn-update:hover {
+  background: #2e7d32;
+}
+
+#total {
+  display: inline-block;
+  padding: 12px;
+  background-color: var(--accent-color);
+  color: #000;
+  border-radius: var(--radius);
+  font-weight: bold;
+  margin-top: 8px;
+  min-width: 120px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 188, 212, 0.4);
+}
+
+/* الجدول */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: var(--card-bg);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+table th, table td {
+  border: 1px solid var(--border-color);
+  padding: 14px;
+  text-align: center;
+  font-size: 15px;
+}
+
+table th {
+  background-color: #222;
+  color: #fff;
+  font-weight: bold;
+}
+
+/* زر الحذف الكلي */
+#deletall {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#deletall button {
+  background: var(--danger-color);
+  border-radius: var(--radius);
+}
+
+/* 📱 استجابة الشاشات الصغيرة */
+@media (max-width: 768px) {
+  #input, .search-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  input,
+  .btn,
+  button,
+  .btn-search {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  table th, table td {
+    font-size: 13px;
+    padding: 10px;
+  }
+}
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 20px;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* تأكيد أن الجدول لا يخرج */
+.table-container table {
+  min-width: 600px; /* أو أي عرض أدنى مناسب حسب أعمدة الجدول */
+}
+.search-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.search-container input {
+  width: 80%;
+  max-width: 500px;
+}
+
+.search-by {
+  display: flex;
+  justify-content: space-between;
+  flex-grow: 1;
+  width: 80%;
+  max-width: 500px;
+  gap: 10px;
+}
+
+.search-buttons button {
+  width: 100%;
+}
